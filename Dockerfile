@@ -8,7 +8,7 @@ ENV VERSION ${VERSION}
 ARG ARCH=amd64
 ARG FILE_SUBDIR=/
 ARG QEMU_ARCH
-ARG FILE=$(curl https://beta.urbackup.org/Server/$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)/ | grep -Po 'urbackup-server_.*?deb' | tail -1)
+ARG FILE=$(curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1)
 ENV FILE ${FILE}
 ARG URL=$("https://beta.urbackup.org/Server/${VERSION}/${FILE}")
 ENV URL ${URL}
