@@ -11,7 +11,7 @@ ARG QEMU_ARCH
 ARG FILE=(curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1)
 ENV FILE=${FILE}
 
-ENV URL="https://beta.urbackup.org/Server/${VERSION}/${FILE}"
+ENV URL="https://beta.urbackup.org/Server/$VERSION/$FILE"
 
 # Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
