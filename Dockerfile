@@ -3,13 +3,13 @@ ARG IMAGE_ARCH=debian:stretch
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG VERSION=2.4.13
+ARG VERSION=$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)
 ENV VERSION ${VERSION}
 ARG ARCH=amd64
 ARG FILE_SUBDIR=/
 ARG QEMU_ARCH
-ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
-ENV URL https://hndl.urbackup.org/Server/${VERSION}/${FILE_SUBDIR}${FILE}
+ENV FILE $(curl https://beta.urbackup.org/Server/$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)/ | grep -Po 'urbackup-server.*?deb' | tail -1)
+ENV URL https://beta.urbackup.org/Server/${VERSION}/${FILE}
 
 # Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
