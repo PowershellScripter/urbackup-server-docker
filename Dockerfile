@@ -3,7 +3,8 @@ ARG IMAGE_ARCH=debian:stretch
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG VERSION=$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)
+ARG VERSION=$(curl https://beta.urbackup.org/Server | grep -Po '\b2.5.(\d+)' | tail -1)
+RUN echo $VERSION
 #ENV VERSION=${VERSION}
 ARG ARCH=amd64
 ARG FILE_SUBDIR=/
