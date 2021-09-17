@@ -8,7 +8,7 @@ ENV VERSION ${VERSION}
 ARG ARCH=amd64
 ARG FILE_SUBDIR=/
 ARG QEMU_ARCH
-ENV FILE $(curl https://beta.urbackup.org/Server/$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)/ | grep -Po 'urbackup-server.*?deb' | tail -1)
+ENV FILE $(curl https://beta.urbackup.org/Server/$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)/ | grep -Po 'urbackup-server_.*?deb' | tail -1)
 ENV URL https://beta.urbackup.org/Server/${VERSION}/${FILE}
 
 # Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
