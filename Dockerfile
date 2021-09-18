@@ -12,28 +12,27 @@ RUN apt-get update \
         
 
 #ENV VERSION ${VERSION}
-#ARG ARCH=amd64
+ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
-#ARG QEMU_ARCH
+ARG QEMU_ARCH
 #ENV FILE urbackup-server_${VERSION}_${ARCH}.deb
 #ENV URL https://beta.urbackup.org/Server/${VERSION}${FILE_SUBDIR}${FILE}
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
-#COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
+COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
 ADD ${URL} /root/${FILE}
 
 ## Install UrBackup-server
-#RUN apt-get update \
-#        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-#        && apt-get install -y --no-install-recommends /root/${FILE} btrfs-tools \
-#        && rm /root/${FILE} \
-#        && apt-get clean \
-#        && rm -rf /var/lib/apt/lists/*
-#
+RUN echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
+        && apt-get install -y --no-install-recommends /root/${FILE} btrfs-tools \
+        && rm /root/${FILE} \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
 ## Backing up www-folder
-#RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
+RUN mkdir /web-backup && cp -R /usr/share/urbackup/* /web-backup
 ## Making entrypoint-script executable
-#RUN chmod +x /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
 
 #EXPOSE 55413
 #EXPOSE 55414
