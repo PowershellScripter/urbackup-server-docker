@@ -6,9 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 #ARG VERSION=2.5.22
 RUN apt-get update \
         && apt install -y curl \
-        && VERSION="$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)" \
-        && FILE="$(curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1)" \
-        && URL="$(`https://beta.urbackup.org/Server/${VERSION}/${FILE}`)"
+        && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
+        && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
+        && URL=`https://beta.urbackup.org/Server/${VERSION}/${FILE}`
+        
         
 
 #ENV VERSION ${VERSION}
