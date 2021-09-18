@@ -6,11 +6,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 #ARG VERSION=2.5.22
 RUN apt-get update \
         && apt install -y curl \
-        && VERSION="$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)" \
-        && FILE="$(curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1)" \
-        && URL="$(`https://beta.urbackup.org/Server/${VERSION}/${FILE}`)"
+        && export VERSION="$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)" \
+        && export FILE="$(curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1)" \
+        && export URL="$(`https://beta.urbackup.org/Server/${VERSION}/${FILE}`)"
         
-RUN echo $URL
+
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
@@ -20,7 +20,7 @@ RUN echo $URL
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 #COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
-#ADD ${URL} /root/${FILE}
+ADD ${URL} /root/${FILE}
 
 ## Install UrBackup-server
 #RUN apt-get update \
