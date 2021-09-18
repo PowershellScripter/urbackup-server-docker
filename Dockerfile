@@ -11,7 +11,7 @@ RUN apt-get update \
         && URL="https://beta.urbackup.org/Server/$VERSION/$FILE"
         
         
-
+RUN echo $URL
 #ENV VERSION ${VERSION}
 ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
