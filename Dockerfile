@@ -8,10 +8,13 @@ RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
+        && exho $FILE > ./FILE
         && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
         
-        
-RUN echo $(cat ./URL)
+ENV FILE=$(cat ./FILE)        
+ENV URL=$(cat ./URL)
+RUN echo $FILE \
+       && echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
