@@ -10,9 +10,11 @@ RUN apt-get update \
         && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
         && echo "$FILE" > ./FILE \
         && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
-        
-ENV FILE=`cat ./FILE`        
-ENV URL=`cat ./URL`
+
+ARG FILE=$(cat ./FILE)
+ENV $FILE
+ARG URL=$(cat ./URL)
+ENV $URL
 RUN echo $FILE \
         && echo $URL
 #ENV VERSION ${VERSION}
