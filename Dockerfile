@@ -8,7 +8,8 @@ RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
-        && URL="https://beta.urbackup.org/Server/$VERSION/$FILE"
+        && URL="https://beta.urbackup.org/Server/$VERSION/$FILE" \
+        && export URL=$URL
         
         
 RUN echo $URL
