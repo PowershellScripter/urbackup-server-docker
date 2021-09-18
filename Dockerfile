@@ -14,7 +14,7 @@ RUN apt-get update \
 ENV FILE="$(cat ./FILE)"        
 ENV URL="$(cat ./URL)"
 RUN echo $FILE \
-       && echo $URL
+        && echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
