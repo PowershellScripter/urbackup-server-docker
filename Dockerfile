@@ -20,13 +20,13 @@ ARG QEMU_ARCH
 #ENV URL https://beta.urbackup.org/Server/${VERSION}${FILE_SUBDIR}${FILE}
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
-COPY entrypoint.sh qemu-${QEMU_ARCH}-static* /usr/bin/
-ADD ${URL} /root/${FILE}
+COPY entrypoint.sh qemu-$QEMU_ARCH-static* /usr/bin/
+ADD $URL /root/$FILE
 
 ## Install UrBackup-server
 RUN echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-        && apt-get install -y --no-install-recommends /root/${FILE} btrfs-tools \
-        && rm /root/${FILE} \
+        && apt-get install -y --no-install-recommends /root/$FILE btrfs-tools \
+        && rm /root/$FILE \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
