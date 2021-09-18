@@ -8,7 +8,7 @@ RUN apt-get update \
         && apt install -y curl \
         && VERSION="$(curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1)" \
         && echo $VERSION
-$RUN echo $VERSION
+#RUN echo $VERSION
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
