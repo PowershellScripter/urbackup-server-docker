@@ -12,7 +12,7 @@ RUN apt-get update \
         && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
-RUN FILE=`cat ./FILE`
+RUN "export FILE=$(cat ./FILE)"
 #ARG FILE=(cat ./FILE)
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
