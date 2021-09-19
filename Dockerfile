@@ -11,7 +11,7 @@ RUN apt-get update \
         && echo "$FILE" > ./FILE \
         && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
-ENV FILE $(cat ./FILE)
+RUN sh -c 'FILE=$(cat ./FILE)'
 #ARG FILE=(cat ./FILE)
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
