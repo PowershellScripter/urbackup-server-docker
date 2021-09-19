@@ -17,7 +17,7 @@ RUN "export FILE=$(cat ./FILE)"
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
-RUN echo ${FILE} 
+RUN echo $FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
