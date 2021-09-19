@@ -13,12 +13,12 @@ RUN apt-get update \
 
 #RUN chmod 600 ./FILE
 RUN FILE=`cat ./FILE` \
-        && echo $FILE
+        && export $FILE
 #ARG FILE=(cat ./FILE)
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
-#RUN echo $FILE
+RUN echo $FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
