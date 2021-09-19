@@ -8,8 +8,8 @@ RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
-        && echo "$FILE" > ./FILE \
-        && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
+        && echo -n "$FILE" > ./FILE \
+        && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
 RUN FILE=`cat "./FILE"` \
