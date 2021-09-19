@@ -12,13 +12,13 @@ RUN apt-get update \
         && echo "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
-RUN FILE="'$(`cat ./FILE`)'" \
+RUN FILE=`cat ./FILE` \
         && export $FILE
 #ARG FILE=(cat ./FILE)
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
-RUN echo $FILE
+RUN echo "$FILE"
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
