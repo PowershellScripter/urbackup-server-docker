@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
-        && "export FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1`" \
+        && "export FILE=$(`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1`)" \
         #&& echo -n "$FILE" > ./FILE \
         #&& export $FILE \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
