@@ -9,11 +9,10 @@ RUN apt-get update \
         && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILES=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \
         && echo $FILES > ./FILE \
-        && export FILE=$(cat ./FILE) \
-        && echo $FILE
+        && export FILE=$(cat ./FILE)
         #&& echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
-#RUN echo $FILE
+RUN echo $FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
