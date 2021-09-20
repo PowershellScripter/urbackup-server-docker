@@ -6,9 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
         && apt-get install -y curl \
-        && curl 'https://raw.githubusercontent.com/PowershellScripter/urbackup-server-docker/master/downloadinstall.sh' > ./downloadinstall.sh \
-        && chmod +x ./downloadinstall.sh \
-        && ./downloadinstall.sh
+        && wget 'downloadinstall.sh' 'https://raw.githubusercontent.com/PowershellScripter/urbackup-server-docker/master/downloadinstall.sh' \
+        && chmod +x downloadinstall.sh \
+        && downloadinstall.sh
 
 #ARG VERSION=2.5.22
 #RUN apt-get update \
