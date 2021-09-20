@@ -1,7 +1,7 @@
 # /bin/bash
 
 apt-get update
-apt-get install -y curl wget
+apt-get install -y wget
 export VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1`
 export FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1`
 export URL="https://beta.urbackup.org/Server/$VERSION/$FILE"
