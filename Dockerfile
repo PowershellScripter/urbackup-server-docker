@@ -1,5 +1,5 @@
 # Base image can be specified by --build-arg IMAGE_ARCH= ; defaults to debian:stretch
-ARG IMAGE_ARCH=debian:stretch
+ARG IMAGE_ARCH=debian:bullseye
 FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,7 @@ RUN apt-get update \
         && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \ 
         && URL="https://beta.urbackup.org/Server/$VERSION/$FILE" \
-        && wget -o "/root/$FILE" "$URL" \
+        && curl -SLO "$URL" "/root/$FILE"\
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
         && apt-get install -y --no-install-recommends /root/$FILE btrfs-tools \
         && rm /root/$FILE \
