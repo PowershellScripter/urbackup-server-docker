@@ -5,7 +5,7 @@ FROM ${IMAGE_ARCH}
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-        && apt-get install -y curl \
+        && apt-get install -y curl wget\
         && wget 'downloadinstall.sh' 'https://raw.githubusercontent.com/PowershellScripter/urbackup-server-docker/master/downloadinstall.sh' \
         && chmod +x downloadinstall.sh \
         && downloadinstall.sh
