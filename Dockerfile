@@ -7,9 +7,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
-        && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
-        && echo -n "$FILE" > ./FILE \
-        && export $FILE \
+        && export FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
+        #&& echo -n "$FILE" > ./FILE \
+        #&& export $FILE \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
@@ -19,7 +19,7 @@ RUN apt-get update \
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
-RUN echo "$FILE"
+RUN echo $FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
