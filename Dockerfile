@@ -12,7 +12,7 @@ RUN apt-get update \
         && URL="https://beta.urbackup.org/Server/$VERSION/$FILE" \
         && curl -s "$URL" -o "/root/$FILE"\
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
-        && apt-get install -y --no-install-recommends /root/$FILE btrfs-tools \
+        && apt-get install -y --no-install-recommends /root/$FILE btrfs-progs \
         && rm /root/$FILE \
         && apt-get clean \
         && rm -rf "/var/lib/apt/lists/*"
