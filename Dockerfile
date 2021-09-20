@@ -4,30 +4,26 @@ FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+#ARG VERSION=2.5.22
 RUN apt-get update \
         && apt-get install -y curl wget\
-        && wget 'downloadinstall.sh' 'https://raw.githubusercontent.com/PowershellScripter/urbackup-server-docker/master/downloadinstall.sh' \
-        && chmod +x downloadinstall.sh \
-        && downloadinstall.sh
+        && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
+        && FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \ 
+        #&& echo $FILE > ./FILE \
+        && URL="https://beta.urbackup.org/Server/$VERSION/$FILE" \
+        && wget -p /root/$FILE "$URL" \
+        && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
+        && apt-get install -y --no-install-recommends /root/$FILE btrfs-tools \
+        && rm /root/$FILE \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+        
 
-#ARG VERSION=2.5.22
-#RUN apt-get update \
-#        && apt-get install -y curl \
-#        && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
-#        && FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \ 
-#        && echo $FILE > ./FILE \
-#        && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
-
-
-#ENV FILE $(cat ./FILE)
-#RUN echo $FILE
-#ARG ARCH=amd64
-#ARG FILE_SUBDIR=/
-#ARG QEMU_ARCH
+ARG QEMU_ARCH
 
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
-#COPY entrypoint.sh qemu-$QEMU_ARCH-static* /usr/bin/
+COPY entrypoint.sh qemu-$QEMU_ARCH-static* /usr/bin/
 #ADD ${cat ./URL} /root/${cat ./FILE}
 
 ## Install UrBackup-server
