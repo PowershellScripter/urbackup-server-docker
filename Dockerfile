@@ -13,7 +13,7 @@ RUN apt-get update \
 #RUN chmod 600 ./FILE
 
 #ENV FILE `cat ./FILE`
-ARG FILE=$(< ./FILE)
+ARG FILE=$(< "./FILE")
 ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
