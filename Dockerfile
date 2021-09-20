@@ -9,7 +9,6 @@ RUN apt-get update \
         && apt-get install -y curl wget\
         && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \ 
-        #&& echo $FILE > ./FILE \
         && URL="https://beta.urbackup.org/Server/$VERSION/$FILE" \
         && wget -p /root/$FILE "$URL" \
         && echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
