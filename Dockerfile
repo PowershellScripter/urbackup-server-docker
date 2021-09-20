@@ -12,7 +12,7 @@ RUN apt-get update \
         && export FILE=$(cat ./FILE)
         #&& echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
-RUN echo $FILE
+RUN cat ./FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
