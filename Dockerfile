@@ -12,7 +12,7 @@ RUN apt-get update \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 
-ENV FILE=${cat .FILE}
+ENV FILE=${cat ./FILE}
 RUN echo $FILE
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
