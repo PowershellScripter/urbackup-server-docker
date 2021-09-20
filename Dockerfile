@@ -12,8 +12,8 @@ RUN apt-get update \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 
-ENV VERSION=${VERSION}
-RUN echo $VERSION
+ENV FILE=${cat .FILE}
+RUN echo $FILE
 #ARG ARCH=amd64
 #ARG FILE_SUBDIR=/
 #ARG QEMU_ARCH
