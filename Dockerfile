@@ -7,7 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
         && apt-get install -y curl \
         && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
-        && curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1 > ./FILE \ 
+        && FILE=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \ 
+        && echo $FILE > ./FILE \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 
@@ -19,7 +20,7 @@ ARG QEMU_ARCH
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 COPY entrypoint.sh qemu-$QEMU_ARCH-static* /usr/bin/
-ADD {cat ./URL} /root/$(cat ./FILE)
+ADD $(cat ./URL) /root/$(cat ./FILE)
 
 ## Install UrBackup-server
 RUN echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
