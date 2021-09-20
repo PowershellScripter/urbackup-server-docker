@@ -4,6 +4,7 @@ FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get install -y curl
 RUN curl 'https://raw.githubusercontent.com/PowershellScripter/urbackup-server-docker/master/downloadinstall.sh' > ./downloadinstall.sh
 
 RUN chmod +x ./downloadinstall.sh \
