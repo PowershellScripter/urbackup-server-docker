@@ -11,8 +11,8 @@ RUN apt-get update \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
-ARG FILE=$(`cat ./FILE`)
-ENV FILE $FILE
+
+ENV FILE `cat ./FILE`
 #ARG FILE=(cat ./FILE)
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
