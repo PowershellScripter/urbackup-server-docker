@@ -20,7 +20,7 @@ ARG QEMU_ARCH
 
 ## Copy the entrypoint-script and the emulator needed for autobuild function of DockerHub
 COPY entrypoint.sh qemu-$QEMU_ARCH-static* /usr/bin/
-ADD {$(cat ./URL)} /root/$(cat ./FILE)
+ADD ${cat ./URL} /root/${cat ./FILE}
 
 ## Install UrBackup-server
 RUN echo "urbackup-server urbackup/backuppath string /backups" | debconf-set-selections \
