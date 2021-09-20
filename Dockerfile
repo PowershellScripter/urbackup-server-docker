@@ -4,8 +4,8 @@ FROM ${IMAGE_ARCH}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN chmod +x ./downloadinstall.sh \
-        && ./downloadinstall.sh
+RUN chmod +x urbackupsrv/downloadinstall.sh \
+        && urbackupsrv/downloadinstall.sh
 #ARG VERSION=2.5.22
 #RUN apt-get update \
 #        && apt-get install -y curl \
