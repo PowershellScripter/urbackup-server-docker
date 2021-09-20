@@ -20,7 +20,7 @@ RUN apt-get update \
 #ENV FILE $FILE
 #ARG URL=(cat ./URL)
 #ENV URL $URL
-echo $FILE
+RUN echo $FILE
         #&& echo $URL
 #ENV VERSION ${VERSION}
 #ARG ARCH=amd64
