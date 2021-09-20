@@ -9,7 +9,7 @@ RUN apt-get update \
         && VERSION=`curl https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILE=`curl https://beta.urbackup.org/Server/${VERSION}/ | grep -Po 'urbackup-server_.*?deb' | tail -1` \
         && echo -n "$FILE" > ./FILE \
-        && export $FILE
+        && export $FILE \
         && echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
 #RUN chmod 600 ./FILE
