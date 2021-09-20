@@ -9,7 +9,7 @@ RUN apt-get update \
         && VERSION=`curl -s https://beta.urbackup.org/Server/ | grep -Po '\b2.5.(\d+)' | tail -1` \
         && FILES=`curl -s "https://beta.urbackup.org/Server/${VERSION}/" | grep -Po 'urbackup-server_.*?deb' | tail -1` \
         && echo $FILES > ./FILE \
-        && /bin/bash -c 'export FILE=$(cat ./FILE)' \
+        && /bin/bash -c 'export FILE=cat ./FILE' \
         && echo $FILE
         #&& echo -n "https://beta.urbackup.org/Server/$VERSION/$FILE" > ./URL 
 
